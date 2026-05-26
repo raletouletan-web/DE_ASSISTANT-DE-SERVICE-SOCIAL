@@ -1,0 +1,25 @@
+# ──────────────────────────────────────────────────────────────
+# Configuration Nixpacks pour Railway
+# ──────────────────────────────────────────────────────────────
+# Railway utilise Nixpacks par défaut pour builder les apps Node.
+# Ce fichier surcharge les commandes pour :
+#   - installer toutes les dépendances (npm ci)
+#   - builder le front Vite (vite build → dist/)
+#   - démarrer le serveur Express (server.js)
+#
+# Pas besoin de modifier package.json (script "start").
+# ──────────────────────────────────────────────────────────────
+
+providers = ["node"]
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "node server.js"
