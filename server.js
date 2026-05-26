@@ -113,8 +113,7 @@ app.get(
 
                 type: "realtime",
 
-                model:
-                  "gpt-realtime",
+                model: "gpt-realtime-preview"
 
                 voice:
                   "shimmer",
