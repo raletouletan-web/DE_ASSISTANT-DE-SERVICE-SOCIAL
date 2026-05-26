@@ -461,8 +461,8 @@ export default function App() {
         );
       }
       const sessionData  = await sessionRes.json();
-      const ephemeralKey = sessionData.value; // ✅ règle GA n°10
-      if (!ephemeralKey) throw new Error("Token éphémère absent. Vérifiez /api/session.");
+      const ephemeralKey = sessionData.client_secret?.value;
+if (!ephemeralKey) throw new Error("Token éphémère absent. Vérifiez /api/session.");
 
       // 2. Micro
       const micStream = await navigator.mediaDevices.getUserMedia({
