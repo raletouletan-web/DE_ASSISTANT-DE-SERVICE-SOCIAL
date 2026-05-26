@@ -65,15 +65,23 @@ app.get("/api/session", async (_req, res) => {
           "Content-Type": "application/json",
         },
    body: JSON.stringify({
-          session: {
-            model: "gpt-4o-realtime-preview",
-            voice: "shimmer",
-    instructions: "Tu es un jury de VAE aide-soignant. Tu parles exclusivement en français.",
-            
-            modalities: ["audio", "text"]
-  },
-}),
-      }
+  session: {
+    type: "realtime",
+
+    model: "gpt-realtime",
+
+    voice: "shimmer",
+
+    modalities: [
+      "audio",
+      "text"
+    ],
+
+    instructions:
+      "Tu es un jury VAE aide-soignant. Tu réalises un oral interactif en français. Tu poses une question à la fois et rebondis sur les réponses du candidat."
+  }
+})
+  }
     );
 
     if (!response.ok) {
