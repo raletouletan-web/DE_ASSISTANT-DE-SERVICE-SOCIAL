@@ -15,8 +15,8 @@ type InterviewMode = null | "apprentissage" | "simulation";
 // ──────────────────────────────────────────────────────────────────
 // Constantes GA
 // ──────────────────────────────────────────────────────────────────
-const WEBRTC_URL = "https://api.openai.com/v1/realtime/calls";
-const MODEL      = "gpt-realtime";
+const WEBRTC_URL = "https://api.openai.com/v1/realtime/webrtc";
+const MODEL      = "gpt-4o-realtime-preview-2024-12-17";
 
 // ──────────────────────────────────────────────────────────────────
 // PROMPT — Jury VAE Aide-Soignant — Conçu par Patrice DIAKITÉ
