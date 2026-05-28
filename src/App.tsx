@@ -72,7 +72,7 @@ Gestion du silence ou de l'hésitation : Si le candidat ne répond pas, hésite 
 SI LE CANDIDAT DIT «TEST JURY», c'est que je teste l'application, va directement à la synthèse finale où tu improviseras des axes d'amélioration. C'est pour me permettre de controler le bon fonctionnement de l'outil.
 
 
-La première question après le choix du mode est toujours : "Pouvez-vous vous présenter brièvement ?, votre prénom, nom, depuis combien de temps vous travaillez ?"
+La première question après le choix du mode est toujours : "Pouvez-vous vous présenter brièvement ?"
 Tu utiliseras le prénom du candidat pour personnaliser tes questions lorsque c'est nécessaire.
 
 4. FONCTIONNEMENT PAR MODE
@@ -153,6 +153,7 @@ export default function App() {
   const [questionNum, setQuestionNum] = useState(0);
   const [synthesis,   setSynthesis]   = useState<string | null>(null);
   const synthesisDetectedRef = useRef(false);
+  const shouldDisconnectRef  = useRef(false);
 
   const INACTIVITY_THRESHOLD = 90;
   const COUNTDOWN_DURATION   = 15;
@@ -243,7 +244,28 @@ export default function App() {
 
   const playNextChunk = useCallback(() => {
     if (!audioCtxRef.current || audioQueueRef.current.length === 0) {
-      isPlayingRef.current = false; setIsSpeaking(false); return;
+      isPlayingRef.current = false;
+      setIsSpeaking(false);
+      // ✅ File audio vide + déconnexion demandée → on déconnecte
+      if (shouldDisconnectRef.current) {
+        shouldDisconnectRef.current = false;
+        setTimeout(() => {
+          dcRef.current?.close();
+          pcRef.current?.close();
+          micStreamRef.current?.getTracks().forEach((t) => t.stop());
+          audioCtxRef.current?.close().catch(() => {});
+          audioQueueRef.current = [];
+          isPlayingRef.current  = false;
+          pcRef.current = dcRef.current = micStreamRef.current = audioCtxRef.current = null;
+          transcriptRef.current = {};
+          const el = document.getElementById("jury-audio") as HTMLAudioElement | null;
+          if (el) el.srcObject = null;
+          setStatus("idle");
+          setIsSpeaking(false);
+          setIsListening(false);
+        }, 3000);
+      }
+      return;
     }
     isPlayingRef.current = true; setIsSpeaking(true);
     const buf    = audioQueueRef.current.shift()!;
@@ -317,6 +339,7 @@ export default function App() {
             t.includes("préparation à poursuivre")
           )) {
             synthesisDetectedRef.current = true;
+            shouldDisconnectRef.current   = true;
             setSynthesis(event.transcript);
           }
         }
@@ -347,26 +370,7 @@ export default function App() {
         break;
 
       case "response.done":
-        // ✅ Si c'est la synthèse finale, attendre que tout l'audio soit lu avant de déconnecter
-        if (synthesisDetectedRef.current) {
-          const waitForAudioEnd = () => {
-            if (audioQueueRef.current.length === 0 && !isPlayingRef.current) {
-              // Audio terminé → déconnexion après 3 secondes de marge
-              setTimeout(() => {
-                cleanup();
-                setStatus("idle");
-                setIsSpeaking(false);
-                setIsListening(false);
-              }, 3000);
-            } else {
-              // Audio encore en cours → on revérifie dans 500ms
-              setTimeout(waitForAudioEnd, 500);
-            }
-          };
-          waitForAudioEnd();
-        } else {
-          setIsSpeaking(false);
-        }
+        setIsSpeaking(false);
         break;
 
       case "error":
@@ -454,6 +458,8 @@ export default function App() {
     cleanup(); setStatus("idle"); setIsSpeaking(false); setIsListening(false);
     setMessages([]); setMode(null); setQuestionNum(0);
     synthesisDetectedRef.current = false;
+    shouldDisconnectRef.current   = false;
+    shouldDisconnectRef.current   = false;
   };
 
   const downloadSynthesis = () => {
