@@ -71,6 +71,7 @@ Gestion du silence ou de l'hésitation : Si le candidat ne répond pas, hésite 
 
 SI LE CANDIDAT DIT «TEST JURY», c'est que je teste l'application, va directement à la synthèse finale où tu improviseras des axes d'amélioration. C'est pour me permettre de controler le bon fonctionnement de l'outil.
 
+
 La première question après le choix du mode est toujours : "Pouvez-vous vous présenter brièvement ?"
 Tu utiliseras le prénom du candidat pour personnaliser tes questions lorsque c'est nécessaire.
 
@@ -588,25 +589,13 @@ export default function App() {
             )}
 
             {!isConnected && !isConnecting && (
-              <div className="flex flex-col items-center gap-4 mt-8">
-                <button onClick={startInterview} className="inline-flex items-center gap-2.5 rounded-xl bg-[#5f6452] px-7 py-3.5 text-[15px] font-medium text-white shadow-[0_8px_20px_rgba(95,100,82,0.25)] hover:bg-[#545a48] active:scale-[0.98] transition-all duration-150">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                    <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" strokeLinecap="round"/>
-                  </svg>
-                  Démarrer l'Entretien
-                </button>
-                {synthesis && (
-                  <button onClick={downloadSynthesis} className="inline-flex items-center gap-2 rounded-xl border-2 border-[#5f6452] px-6 py-3 text-[14px] font-semibold text-[#5f6452] hover:bg-[#5f6452] hover:text-white transition-all duration-150 shadow-sm">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                      <polyline points="7 10 12 15 17 10"/>
-                      <line x1="12" y1="15" x2="12" y2="3"/>
-                    </svg>
-                    Télécharger la synthèse (.txt)
-                  </button>
-                )}
-              </div>
+              <button onClick={startInterview} className="mt-8 inline-flex items-center gap-2.5 rounded-xl bg-[#5f6452] px-7 py-3.5 text-[15px] font-medium text-white shadow-[0_8px_20px_rgba(95,100,82,0.25)] hover:bg-[#545a48] active:scale-[0.98] transition-all duration-150">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" strokeLinecap="round"/>
+                </svg>
+                Démarrer l'Entretien
+              </button>
             )}
 
             {isConnected && (
@@ -653,6 +642,36 @@ export default function App() {
                 ))}
                 <div ref={messagesEndRef}/>
               </div>
+            </div>
+          )}
+
+          {/* ✅ Synthèse finale — affichée après déconnexion */}
+          {!isConnected && synthesis && (
+            <div className="mt-8 border-t border-[#f0ebe1] pt-7">
+              <div className="flex items-center gap-2 mb-5">
+                <div className="h-7 w-7 rounded-full bg-[#5f6452] flex items-center justify-center flex-shrink-0">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                    <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                  </svg>
+                </div>
+                <h3 className="text-[11px] font-semibold tracking-[0.14em] text-[#5f6452] uppercase">Synthèse finale de votre entretien</h3>
+              </div>
+              <div className="bg-[#f9f8f5] rounded-2xl border border-[#e8e4d9] p-5 sm:p-6">
+                <div className="text-[13px] sm:text-[14px] leading-relaxed text-[#3a3e34] whitespace-pre-wrap">
+                  {synthesis}
+                </div>
+              </div>
+              <button
+                onClick={downloadSynthesis}
+                className="mt-5 w-full inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-[#5f6452] px-6 py-3.5 text-[13px] sm:text-[14px] font-semibold text-[#5f6452] hover:bg-[#5f6452] hover:text-white transition-all duration-200 shadow-sm"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Télécharger votre synthèse de Jury IA de Patrice DIAKITÉ
+              </button>
             </div>
           )}
         </section>
