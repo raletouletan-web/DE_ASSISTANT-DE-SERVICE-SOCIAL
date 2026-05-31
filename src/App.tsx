@@ -307,10 +307,13 @@ export default function App() {
         sendEvent({
           type: "session.update",
           session: {
+            type: "realtime",
             instructions: INSTRUCTIONS,
-            // ── VAD désactivée : l'IA ne peut pas être interrompue par un bruit ──
-            turn_detection: null,
-            input_audio_transcription: { model: "whisper-1" },
+            audio: {
+              input: {
+                transcription: { model: "whisper-1" },
+              },
+            },
           },
         });
         sendEvent({ type: "response.create" });
