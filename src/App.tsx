@@ -1037,10 +1037,10 @@ export default function App() {
             <h3 className="text-[10px] tracking-[0.2em] text-[#8a8f7d] font-semibold mb-4 uppercase">Référentiel DEASS — 4 domaines</h3>
             <div className="space-y-2">
               {[
-                { code: "DA1", label: "INTERVENTION PROFESSIONNELLE EN TRAVAIL SOCIAL" },
-                { code: "DA2", label: "ANALYSE DES QUESTIONS SOCIALES DE L'INTERVENTION PROFESSIONNELLE EN TRAVAIL SOCIAL" },
-                { code: "DA3", label: "COMMUNICATION PROFESSIONNELLE" },
-                { code: "DA4", label: "DYNAMIQUES INTERINSTITUTIONNELLES, PARTENARIATS ET RÉSEAUX" },
+                { code: "DA1", label: "Intervention professionnelle en travail social" },
+                { code: "DA2", label: "Analyse des questions sociales de l'intervention professionnelle en travail social" },
+                { code: "DA3", label: "Communication professionnelle" },
+                { code: "DA4", label: "Dynamiques interinstitutionnelles, partenariats et réseaux" },
               ].map((da) => (
                 <div key={da.code} className="flex items-center gap-2.5">
                   <span className="text-[10px] font-mono font-bold text-[#5f6452] bg-[#f3f2ee] px-2 py-0.5 rounded flex-shrink-0">{da.code}</span>
