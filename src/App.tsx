@@ -1013,7 +1013,7 @@ export default function App() {
               {[
                 { n: 1, label: "Choix du mode",  desc: "Apprentissage ou Simulation." },
                 { n: 2, label: "Présentation",    desc: "Identité et parcours professionnel." },
-                { n: 3, label: "10 questions",    desc: "5 domaines DEAS · 11 compétences." },
+                { n: 3, label: "10 questions",    desc: "4 domaines Assitant de Service Social ." },
                 { n: 4, label: "Synthèse finale", desc: "Verdict et conseils personnalisés." },
               ].map((step) => {
                 const stepActive = step.n === 1 ? (isConnected && !mode) : step.n === 2 ? (isConnected && !!mode && questionNum === 0) : step.n === 3 ? (isConnected && !!mode && questionNum > 0 && questionNum < 10) : step.n === 4 ? (isConnected && questionNum >= 10) : false;
@@ -1034,14 +1034,13 @@ export default function App() {
           </section>
 
           <section className="bg-white rounded-[24px] border border-[#ebe6db] shadow-[0_4px_16px_rgba(0,0,0,0.03)] p-5 sm:p-6">
-            <h3 className="text-[10px] tracking-[0.2em] text-[#8a8f7d] font-semibold mb-4 uppercase">Référentiel DEAS — 5 domaines</h3>
+            <h3 className="text-[10px] tracking-[0.2em] text-[#8a8f7d] font-semibold mb-4 uppercase">Référentiel DEASS — 4 domaines</h3>
             <div className="space-y-2">
               {[
-                { code: "DA1", label: "Vie quotidienne & sociale" },
-                { code: "DA2", label: "État clinique & soins adaptés" },
-                { code: "DA3", label: "Information & accompagnement" },
-                { code: "DA4", label: "Environnement & matériels" },
-                { code: "DA5", label: "Transmissions & continuité" },
+                { code: "DA1", label: "INTERVENTION PROFESSIONNELLE EN TRAVAIL SOCIAL" },
+                { code: "DA2", label: "ANALYSE DES QUESTIONS SOCIALES DE L'INTERVENTION PROFESSIONNELLE EN TRAVAIL SOCIAL" },
+                { code: "DA3", label: "COMMUNICATION PROFESSIONNELLE" },
+                { code: "DA4", label: "DYNAMIQUES INTERINSTITUTIONNELLES, PARTENARIATS ET RÉSEAUX" },
               ].map((da) => (
                 <div key={da.code} className="flex items-center gap-2.5">
                   <span className="text-[10px] font-mono font-bold text-[#5f6452] bg-[#f3f2ee] px-2 py-0.5 rounded flex-shrink-0">{da.code}</span>
@@ -1050,7 +1049,7 @@ export default function App() {
               ))}
             </div>
             <div className="mt-3 pt-3 border-t border-[#f0ebe1]">
-              <span className="text-[11px] text-[#9a9f8d]">11 compétences évaluées</span>
+              <span className="text-[11px] text-[#9a9f8d]">4 compétences évaluées</span>
             </div>
           </section>
 
@@ -1091,7 +1090,7 @@ export default function App() {
             <h4 className="text-[11px] font-semibold tracking-wide text-[#5a5e50] uppercase">Sujets évalués</h4>
           </div>
           <ul className="space-y-1.5 text-[12px] text-[#5e6457]">
-            {["Actes essentiels & vie quotidienne","Soins, hygiène & prévention des risques","Communication & accompagnement famille","Transmissions & travail en équipe","Entretien des locaux & matériels"].map((s) => (
+            {["Accueil et écoute des personnes","Évaluation, conseil et orientation","Accompagnement social individuel","Accompagnement social collectif","Conseil au développement des politiques sociales et territoriales"].map((s) => (
               <li key={s} className="flex gap-2"><span className="text-[#b0b5a5] flex-shrink-0">•</span>{s}</li>
             ))}
           </ul>
@@ -1104,7 +1103,7 @@ export default function App() {
             <h4 className="text-[11px] font-semibold tracking-wide text-[#5a5e50] uppercase">Conseils de préparation</h4>
           </div>
           <ul className="space-y-1.5 text-[12px] text-[#5e6457]">
-            {["Préparez des exemples concrets et datés","Maîtrisez le vocabulaire technique (asepsie, VAD, escarre…)","Décrivez vos gestes étape par étape","Citez votre structure d'exercice précisément","Ne vous pressez pas — le jury attend"].map((s) => (
+            {["Préparez des exemples concrets et datés","Maîtrisez le vocabulaire technique","Décrivez vos gestes étape par étape","Citez votre structure d'exercice précisément","Ne vous pressez pas — le jury attend"].map((s) => (
               <li key={s} className="flex gap-2"><span className="text-[#b0b5a5] flex-shrink-0">•</span>{s}</li>
             ))}
           </ul>
