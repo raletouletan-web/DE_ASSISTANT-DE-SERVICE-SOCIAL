@@ -23,7 +23,7 @@ const INSTRUCTIONS = `LANGUE : Tu DOIS parler UNIQUEMENT en français. Toutes te
 Tu fonctionnes en temps réel (speech-to-speech). Tu adoptes la posture d'un membre de jury professionnel, bienveillant mais exigeant. Phrases courtes. Une seule question à la fois.
 
 ════════════════════════════════════════════════
-PROMPT IA VOCALE — JURY VAE ASSISTANT-DE-SERVICE-SOCIAL
+PROMPT IA VOCALE — JURY VAE ASSISTANT DE SERVICE SOCIAL
 Conçu par Patrice DIAKITÉ
 ════════════════════════════════════════════════
 
@@ -776,7 +776,7 @@ export default function App() {
     if (!synthesis) return;
     const date = new Date().toLocaleDateString("fr-FR").replace(/\//g, "-");
     const content = [
-      "SYNTHÈSE FINALE — JURY VAE ASSISTANT-DE-SERVICE-SOCIAL",
+      "SYNTHÈSE FINALE — JURY VAE ASSISTANT DE SERVICE SOCIAL",
       "Conçu par Patrice DIAKITÉ · SAVOIRSCOPE",
       `Date : ${new Date().toLocaleDateString("fr-FR")}`,
       "",
@@ -825,7 +825,7 @@ export default function App() {
             </div>
             <div className="min-w-0">
               <div className="font-serif text-[17px] sm:text-[21px] leading-none italic tracking-tight text-[#2b2e27] truncate">
-                Jury IA : <span className="font-medium not-italic">VAE ASSISTANT-DE-SERVICE-SOCIAL</span>
+                Jury IA : <span className="font-medium not-italic">VAE ASSISTANT DE SERVICE SOCIAL</span>
               </div>
               <div className="text-[9px] tracking-widest text-[#7a7f6f] mt-0.5">
                 ENTRAÎNEMENT OFFICIEL & SIMULATION · SAVOIRSCOPE
